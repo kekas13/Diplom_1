@@ -1,49 +1,54 @@
-import pytest
+import unittest
 
 from ..ingredient import Ingredient
 
 
-class TestIngredient:
-    ingredient = pytest.mark.parametrize('ingredient_type, name, price',
-                                         [('Соус', 'Spicy-X', 1.5)])
+class TestIngredient(unittest.TestCase):
 
-    @ingredient
-    def test_init_type(self, ingredient_type, name, price):
-        assert Ingredient(ingredient_type, name, price).get_type() == ingredient_type
+    def test_init_type(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertEqual(Ingredient(ingredient_type, name, price).get_type(), ingredient_type)
 
-    @ingredient
-    def test_init_name(self, ingredient_type, name, price):
-        assert Ingredient(ingredient_type, name, price).get_name() == name
+    def test_init_name(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertEqual(Ingredient(ingredient_type, name, price).get_name(), name)
 
-    @ingredient
-    def test_init_price(self, ingredient_type, name, price):
-        assert Ingredient(ingredient_type, name, price).get_price() == price
+    def test_init_price(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertEqual(Ingredient(ingredient_type, name, price).get_price(), price)
 
-    @ingredient
-    def test_check_type_ingredient_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_type()) is str
+    def test_check_type_ingredient_type(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertIsInstance(Ingredient(ingredient_type, name, price).get_type(), str)
 
-    @ingredient
-    def test_check_name_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_name()) is str
+    def test_check_name_type(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertIsInstance(Ingredient(ingredient_type, name, price).get_name(), str)
 
-    @ingredient
-    def test_check_price_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_price()) is float
+    def test_check_price_type(self):
+        for ingredient_type, name, price in [('Соус', 'Spicy-X', 1.5)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertIsInstance(Ingredient(ingredient_type, name, price).get_price(), float)
 
 
-class TestNegativeIngredient:
-    ingredient = pytest.mark.parametrize('ingredient_type, name, price',
-                                         [(123, None, 0)])
+class TestNegativeIngredient(unittest.TestCase):
 
-    @ingredient
-    def test_check_type_ingredient_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_type()) is not str
+    def test_check_type_ingredient_type(self):
+        for ingredient_type, name, price in [(123, None, 0)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertNotIsInstance(Ingredient(ingredient_type, name, price).get_type(), str)
 
-    @ingredient
-    def test_check_name_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_name()) is not str
+    def test_check_name_type(self):
+        for ingredient_type, name, price in [(123, None, 0)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertNotIsInstance(Ingredient(ingredient_type, name, price).get_name(), str)
 
-    @ingredient
-    def test_check_price_type(self, ingredient_type, name, price):
-        assert type(Ingredient(ingredient_type, name, price).get_price()) is not float
+    def test_check_price_type(self):
+        for ingredient_type, name, price in [(123, None, 0)]:
+            with self.subTest(ingredient_type=ingredient_type, name=name, price=price):
+                self.assertNotIsInstance(Ingredient(ingredient_type, name, price).get_price(), float)

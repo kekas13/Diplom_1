@@ -1,15 +1,18 @@
-import pytest
+import unittest
 
 from ..database import Database
 
 
-class TestDatabase:
-    @pytest.mark.parametrize('bun', ['black bun'])
-    def test_available_buns(self, bun):
-        buns_list = lambda: [i.get_name() for i in Database().available_buns()]
-        assert bun in buns_list()
+class TestDatabase(unittest.TestCase):
 
-    @pytest.mark.parametrize('ingredient', ['hot sauce'])
-    def test_available_ingredients(self, ingredient):
+    def test_available_buns(self):
+        buns_list = lambda: [i.get_name() for i in Database().available_buns()]
+        for bun in ['black bun']:
+            with self.subTest(bun=bun):
+                self.assertIn(bun, buns_list())
+
+    def test_available_ingredients(self):
         ingredients_list = lambda: [i.get_name() for i in Database().available_ingredients()]
-        assert ingredient in ingredients_list()
+        for ingredient in ['hot sauce']:
+            with self.subTest(ingredient=ingredient):
+                self.assertIn(ingredient, ingredients_list())
